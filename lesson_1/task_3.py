@@ -1,11 +1,16 @@
+""" PyQT homework lesson 1, task 3 """
 from task_2 import host_range_ping
 
 
-def host_range_ping_tab(subnet, start_host: int, end_host: int):
-    host_range_ping(subnet, start_host, end_host, prettify=True, tablefmt='pipe', stralign='center')
+def host_range_ping_tab(start_host, hosts_count: int):
+    """
+    Call 'host_range_ping' with prettify=True
+    :param start_host: IP address of the start host
+    :param hosts_count: Count of hosts to ping. If count > 0 addresses will increase, if < 0 will decrease
+    :return: None
+    """
+    host_range_ping(start_host, hosts_count, prettify=True, tablefmt='pipe', stralign='center')
 
 
 if __name__ == '__main__':
-    host_range_ping_tab('192.168.181.0/24', 155, 156)
-    host_range_ping_tab('192.168.181.0/24', 1, 3)
-
+    host_range_ping_tab('8.8.8.4', 6)
