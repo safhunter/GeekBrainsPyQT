@@ -1,26 +1,33 @@
+from loguru import logger
+
+
 class PortNumber:
-    def __init__(self, name):
-        self.name = '_' + name
+
+    def __set_name__(self, owner, name):
+        self.public_name = name
+        self.private_name = '_' + name
 
     def __get__(self, instance, instance_type):
-        return getattr(instance, self.name, 7777)
+        return getattr(instance, self.private_name, 7777)
 
     def __set__(self, instance, value):
+        logger.debug(f"Updating port {self.public_name} to {value}")
         if not (value >= 0):
+            logger.error(f"Unable to update port {self.public_name} to {value}")
             raise ValueError("Port must be >= 0")
-        setattr(instance, self.name, value)
+        setattr(instance, self.private_name, value)
 
 
 class TestServer:
 
-    port = PortNumber('local_port')
-    port_2 = PortNumber('remote_port')
+    local_port = PortNumber()
+    remote_port = PortNumber()
 
     def __init__(self):
-        self.port = 100
-        print(self.port)
-        print(self.port_2)
-        self.port_2 = -5
+        self.local_port = 100
+        print(self.local_port)
+        print(self.remote_port)
+        self.remote_port = -5
 
 
 if __name__ == '__main__':

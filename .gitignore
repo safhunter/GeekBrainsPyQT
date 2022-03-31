@@ -2,3 +2,4 @@ homevenv
 venv
 .idea
 .env
+client.log
