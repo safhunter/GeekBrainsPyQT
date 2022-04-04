@@ -2,3 +2,5 @@ homevenv
 venv
 .idea
 .env
+client.log
+test_base.db3
